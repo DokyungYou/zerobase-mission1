@@ -1,5 +1,5 @@
 <%@page import="java.util.List" %>  
-<%@page import="rto.Test_JDBC"%>
+<%@page import="rto.BookmarkService"%>
 <%@page import="dto.BookmarkGroup_Object"%>
 
 
@@ -82,10 +82,10 @@ function goToAdd_Bookmark.jsp() {
 </thead> 
 
 <%
-Test_JDBC bookmark = new Test_JDBC();
-int totalCnt = bookmark.select_tableDataCount("bookmark_group");
+BookmarkService bookmarkService = new BookmarkService();
+int totalCnt =bookmarkService.select_tableDataCount("bookmark_group");
 if(totalCnt > 0){
-	List<BookmarkGroup_Object> bookmarkList = bookmark.selectAll_BookmarkGroup();
+	List<BookmarkGroup_Object> bookmarkList = bookmarkService.selectAll_BookmarkGroup();
 	
 	for(BookmarkGroup_Object bookmarkObject : bookmarkList ){
 	String bookmarkName = bookmarkObject.getBookmarkName();

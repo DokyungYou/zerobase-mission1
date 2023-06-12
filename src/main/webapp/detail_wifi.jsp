@@ -1,14 +1,16 @@
 <%@page import="dto.NearWifiObject"%>
-<%@page import="rto.Test_JDBC"%>
 <%@page import="dto.BookmarkGroup_Object"%>
+
+<%@page import="rto.WifiService"%>
+<%@page import="rto.BookmarkService"%>
+
+
+
 <%@ page import="java.util.List" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
     
-<%
- Test_JDBC dbConn = new Test_JDBC();
-%>   
     
 <!DOCTYPE html>
 <html>
@@ -47,12 +49,13 @@
 //관리번호 받아오기 
 String X_SWIFI_MGR_NO = request.getParameter("mgrNo");  //이거 북마크 만들때 같이 매개변수로 넣기
 
-
 //거리
 String distance = request.getParameter("distance"); //이거 북마크 만들때 같이 매개변수로 넣기
 
 
-NearWifiObject wifiDetail = dbConn.select_Wifi_Detail(X_SWIFI_MGR_NO);
+WifiService wifiService = new WifiService();
+
+NearWifiObject wifiDetail = wifiService.select_Wifi_Detail(X_SWIFI_MGR_NO);
 
 %>
 
@@ -97,8 +100,8 @@ function sendSelectValue(){
 
 
 <%
-List<BookmarkGroup_Object> groupList = dbConn.select_bookmark_NameID();
-
+BookmarkService bookmarkService = new BookmarkService();
+List<BookmarkGroup_Object> groupList = bookmarkService.select_bookmark_NameID();
 %>
 
 <p>
@@ -232,7 +235,7 @@ if(id != null && wifi_no!= null && wifi_distance!=null){
 	}else{
 		int ID = Integer.valueOf(id);
 
-		dbConn.insertBookmarkList(ID, wifi_no, wifi_distance);
+		bookmarkService.insertBookmarkList(ID, wifi_no, wifi_distance);
 		
 		response.sendRedirect("bookmark-list.jsp");
 	}

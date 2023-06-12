@@ -1,4 +1,4 @@
-<%@page import="rto.Test_JDBC"%>
+<%@page import="rto.BookmarkService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,8 +17,8 @@
 	String id = request.getParameter("id").trim();
 	
 	int ID = Integer.valueOf(id);
-	Test_JDBC delete = new Test_JDBC();
-	delete.delete_bookmark(ID); 
+	BookmarkService bookmarkService = new BookmarkService();
+	bookmarkService.delete_bookmark(ID); 
 	response.sendRedirect("bookmark-list.jsp");
 	
 

@@ -1,4 +1,4 @@
-<%@page import="rto.Test_JDBC"%>
+<%@page import="rto.BookmarkService"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -39,7 +39,7 @@ System.out.println("edit에서 보낸 이름: " + order);
 if(name != null && order != null && id != null){
 	int ID = Integer.valueOf(id.trim());
 	
-	Test_JDBC update = new Test_JDBC();
+	BookmarkService update = new BookmarkService();
 		
 	update.update_bookmarkGroup(name, order, ID);
 	response.sendRedirect("bookmark-group.jsp");

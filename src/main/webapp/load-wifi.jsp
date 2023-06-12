@@ -1,6 +1,9 @@
 <%@page import="rto.TestGsonFromAPI"%>
-<%@ page import="rto.Test_JDBC" %> 
+<%@ page import="rto.WifiService" %>  
+
 <%@ page import="java.util.Date" %>
+ 
+
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -20,11 +23,11 @@
 
 
 <%
-	 Test_JDBC dbConn = new Test_JDBC();
+	 WifiService wifiService = new WifiService();
 	 TestGsonFromAPI openApi = new TestGsonFromAPI();
 	 
 	 long startTime = System.nanoTime();
-	 dbConn.dbInsertAll();
+	 wifiService.dbInsertAll();
 	 long endTime = System.nanoTime();
 	 
 	 int totalCnt = openApi.get_Total_Cnt();

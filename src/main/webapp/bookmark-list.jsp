@@ -1,5 +1,5 @@
 <%@ page import="java.util.List" %>     
-<%@ page import="rto.Test_JDBC" %> 
+<%@page import="rto.BookmarkService"%>
 <%@ page import="dto.Bookmark" %> 
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -61,7 +61,7 @@
 
 <%
 
-Test_JDBC bookmark = new Test_JDBC();
+BookmarkService bookmark = new BookmarkService();
 int totalCnt = bookmark.select_tableDataCount("bookmark_list");
 
 if(totalCnt > 0){

@@ -1,10 +1,8 @@
 package rto;
 
-
-
 public class RunTest {
 	public static void main(String[] args) {
-	 Test_JDBC test= new Test_JDBC();
+	 WifiService test= new WifiService();
 	 
 	 
 //	 long startTime = System.nanoTime();

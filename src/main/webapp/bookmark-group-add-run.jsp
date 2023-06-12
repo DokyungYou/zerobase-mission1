@@ -1,4 +1,4 @@
-<%@page import="rto.Test_JDBC"%>
+<%@page import="rto.BookmarkService"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -37,7 +37,7 @@ System.out.println("add에서 보낸 순서: " + order);
 
 if(name != null && order != null){
 		
-	Test_JDBC bookmarkGroup = new Test_JDBC();
+	BookmarkService bookmarkGroup = new BookmarkService();
 	bookmarkGroup.insert_BookmarkGroup(name, order);
 	response.sendRedirect("bookmark-group.jsp"); 
 } 

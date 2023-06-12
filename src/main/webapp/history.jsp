@@ -1,5 +1,6 @@
+<%@page import="rto.HistoryService"%>
 <%@ page import="java.util.List" %>   
-<%@ page import="rto.Test_JDBC" %>   
+
 <%@ page import="dto.HistoryObject" %>  
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -46,6 +47,9 @@ function sendValue(value) {
 </script>
 
 
+
+<%HistoryService historyService = new HistoryService(); %>
+
 </head>
 
 <body>
@@ -53,7 +57,7 @@ function sendValue(value) {
 <p>
 	<a href="main_wifi.jsp">홈</a> | 
 	<a href="history.jsp">위치 히스토리 목록</a> |
-	<a href="load-wifi.jsp" onclick="return loading()">Open API 와이파이 정보 가져오기</a>  <!-- 자바스크립트 함수로 만들기(자바 메소드 호출, 알림창 생성 -->	
+	<a href="load-wifi.jsp">Open API 와이파이 정보 가져오기</a> 
 </p>	
 	
 
@@ -72,10 +76,11 @@ function sendValue(value) {
 </thead> 
 
 <%
-Test_JDBC history = new Test_JDBC();
-int totalCnt = history.select_tableDataCount("history");
+
+
+int totalCnt = historyService.select_tableDataCount("history");
 if(totalCnt > 0){
-	List<HistoryObject> historyList = history.selectAll_history();
+	List<HistoryObject> historyList = historyService.selectAll_history();
 	
 	for(HistoryObject historyObject : historyList ){
 		
@@ -118,8 +123,8 @@ String value = request.getParameter("parameter");
 
 if(value != null){
 	int id = Integer.valueOf(value);
-	Test_JDBC historyD = new Test_JDBC();
-	historyD.delete_history(id);
+
+	historyService.delete_history(id);
 	response.sendRedirect(request.getRequestURI());
 }
 

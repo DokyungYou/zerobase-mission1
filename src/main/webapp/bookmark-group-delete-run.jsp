@@ -1,4 +1,4 @@
-<%@page import="rto.Test_JDBC"%>
+<%@page import="rto.BookmarkService"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -15,7 +15,7 @@
 System.out.println(group_ID);
 if(group_ID != null){
 	int id = Integer.valueOf(group_ID.trim());
-	Test_JDBC delete = new Test_JDBC();
+	BookmarkService delete = new BookmarkService();
 		
 	delete.delete_bookmarkGroup(id);
 	response.sendRedirect("bookmark-group.jsp");	

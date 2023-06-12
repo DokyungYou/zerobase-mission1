@@ -1,5 +1,5 @@
 <%@page import="java.awt.print.Book"%>
-<%@page import="rto.Test_JDBC"%>
+<%@page import="rto.BookmarkService"%>
 <%@page import="dto.Bookmark"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -39,17 +39,19 @@
 
 
 <%
-//나중에 아이디만 받는걸로 수정하자
+
 String bookmarkID = request.getParameter("id_B"); 
 
+//확인용
 System.out.println("받아온" + bookmarkID);
 
 
-Test_JDBC delete = new Test_JDBC();
+BookmarkService bookmarkService = new BookmarkService();
 
 int id = Integer.valueOf(bookmarkID.trim());
-Bookmark deleteObject = delete.select_bookmarkDelete(id);
+Bookmark deleteObject = bookmarkService.select_bookmarkDelete(id);
 
+//확인용
 System.out.println("바꾼" + id);
 %>
 

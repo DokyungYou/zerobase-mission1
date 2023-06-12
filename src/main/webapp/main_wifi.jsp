@@ -2,16 +2,13 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="java.util.List" %>     
-<%@ page import="rto.Test_JDBC" %>    
+
+
+<%@ page import="rto.WifiService" %>   
+<%@ page import="rto.HistoryService" %> 
 <%@ page import="dto.NearWifiObject" %>   
 
 
-<%//객체는 하나만 생성하고 재활용하게끔
- Test_JDBC dbConn = new Test_JDBC();
-%>
-
-
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,40 +57,7 @@
             alert("해당 브라우저에서 지원하지 않습니다.");
         }
     }
-    
-    
-    <!-- 뭐지 이거-->
-//    function sendNumber(wifiNumber) {
-//    var url = 'detail_wifi.jsp?wifiNumber=' + wifiNumber;
-//    location.href = url;          
-//    }
-    
- 
-    //와이파이 불러오기 재실행 방지
-        var isLoading = false;
 
-        function loading() {
-            if (isLoading) {
-                return false;
-            }
-
-            isLoading = true;
-            showLoadingMessage();
-
-            var url = 'load-wifi.jsp';
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    hideLoadingMessage();
-                    showNotification('작업이 완료되었습니다.');
-                    isLoading = false;
-                }
-            };
-            xhr.send();
-
-            return false;
-        }
 
 
  
@@ -129,7 +93,7 @@
 	<button type="button" onclick="showPosition()">내 위치 가져오기</button>
 
 
-<!-- 이 버튼 누를 때, 해당 좌표 기준으로 히스토리 테이블에 데이터 생성-->	
+<!-- 이 버튼 누를 때, 해당 좌표 기준으로 히스토리 테이블에 데이터 생성-->
 	<button type="submit" name="nearWifi_info" onclick="this.form.submit()">근처 WIPI 정보 보기</button>  
 </form>
 
@@ -169,11 +133,15 @@ if(latV != null && lntV != null){
 	double lat = Double.valueOf(latV);
 	double lnt = Double.valueOf(lntV);
 	
+	WifiService wifiService = new WifiService();
+	HistoryService historyService = new HistoryService();
+	
+	
     //히스토리 생성하는 메소드 호출
- 	dbConn.insert_history(lat,lnt);
+ 	historyService.insert_history(lat,lnt);
 
     //20개 뽑아오기
-	List<NearWifiObject> wifiList = dbConn.selectNearWifi20(lat, lnt);
+	List<NearWifiObject> wifiList = wifiService.selectNearWifi20(lat, lnt);
 
 %>
 
@@ -213,10 +181,6 @@ for(NearWifiObject wifi : wifiList){%>
 </tr>	
 
 
-
-</tbody>	
-	
-	
 	<%}%>
 </table>
 
